@@ -17,7 +17,7 @@ api = ExpandedPyMISP(misp_url, misp_key, misp_verifycert)
 def provision():
     # Add demo organisation
     org = MISPOrganisation()
-    org.name = org_name 
+    org.name = org_name
     org.nationality = "Belgium"
     org.sector = "IT"
     org.type = "Training organisation"
@@ -38,7 +38,7 @@ def provision():
         user.org_id = orgid
         user.role_id = 1  # Site admin
         add_user = api.add_user(user, pythonify=True)
-        print("Add user %s" % user.email)
+        print(f"Add user {user.email}")
 
         user = MISPUser()
         user.email = default_user.format(user=current_user)
@@ -47,8 +47,8 @@ def provision():
         user.change_pw = 0
         user.org_id = orgid
         user.role_id = 3  # User
-        add_user = api.add_user(user, pythonify=True)    
-        print("Add user %s" % user.email)
+        add_user = api.add_user(user, pythonify=True)
+        print(f"Add user {user.email}")
 
         current_user += 1
 
@@ -62,12 +62,12 @@ def unprovision():
                 user = MISPUser()
                 user.id = obj['id']
                 api.delete_user(user)
-                print("delete %s" % obj['email'])
+                print(f"delete {obj['email']}")
             elif obj['email'] == default_user.format(user=current_user):
                 user = MISPUser()
                 user.id = obj['id']
                 api.delete_user(user)
-                print("delete %s" % obj['email'])
+                print(f"delete {obj['email']}")
         current_user +=1 
 
 
